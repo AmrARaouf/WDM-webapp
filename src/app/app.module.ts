@@ -4,17 +4,21 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
-import { PatientComponent } from './patient/patient.component';
+import { AppComponent } from '@app/app.component';
+import { SearchComponent } from '@app/search/search.component';
+import { PatientComponent } from '@app/patient/patient.component';
 
-import { ROUTES } from './routes'
+import { PatientService } from '@app/patient.service';
+import { StringToDatePipe } from '@app/string-to-date.pipe'
+
+import { ROUTES } from '@app/routes';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    PatientComponent
+    PatientComponent,
+    StringToDatePipe
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,9 @@ import { ROUTES } from './routes'
     FormsModule,
     HttpModule,
   ],
-  providers: [],
+  providers: [
+    PatientService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

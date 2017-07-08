@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PatientService } from '@app/patient.service'
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  private patients;
+
+  constructor(private patientService: PatientService) { }
 
   ngOnInit() {
+    this.patients = []
+    this.patientService.getPatients().subscribe( patients => this.patients = patients )
   }
 
 }
