@@ -16,6 +16,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.patients = []
     this.patientService.getPatients().subscribe( patients => this.patients = patients )
+    console.log(this.patients);
   }
 
 }

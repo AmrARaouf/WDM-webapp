@@ -1,1 +1,20 @@
-<h2>{{patient.name}}</h2>
+<h2>{{patient?.name}}</h2>
+<tr *ngFor="let wound of patient?.wounds">     
+    <h2>{{ wound.position }} : {{ wound._id }} </h2> 
+    <br>
+    <td *ngFor="let doc of wound.documentations">
+       {{ doc.date }} : {{ doc.length }} / {{ doc.width }}
+       <img [src]="doc.img" />
+       <br>
+    </td>
+    <br>
+</tr>
+
+<br>
+-------------------------------------------
+
+<h2>{{patient?._id}}</h2>
+
+<div>
+    <qr-code [value]="patient?._id" [size]="150"></qr-code>
+</div>
