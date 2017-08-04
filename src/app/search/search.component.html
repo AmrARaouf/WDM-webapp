@@ -1,5 +1,19 @@
-<p *ngFor="let patient of patients">
-  {{patient.name}}
-  {{patient._id}}
-</p>
+<button class="btn-primary" routerLink="/patient/new">Create new Patient</button>
 
+<input type="text" [(ngModel)]="term" placeholder="search patients">
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Patient Name</th>
+      <th>Patient Birthday</th>
+      <th>Admission Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let patient of patients |filter:term">
+      <td><a [routerLink]="['/patient', patient._id]" >{{patient.firstName}} {{patient.lastName}}</a></td>
+      <td>{{patient.birthdate}}</td>
+      <td>{{patient.creationDate}}</td>
+    </tr>
+  </tbody>
+</table>    
