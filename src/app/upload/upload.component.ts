@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WoundService } from '@app/wound.service';
+import { WoundService } from '@app/_services/wound.service';
 import {FileUploader} from 'ng2-file-upload';
 
 @Component({

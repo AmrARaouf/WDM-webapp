@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PatientService } from '@app/patient.service'
+import { PatientService } from '@app/_services/patient.service'
 
 @Component({
   selector: 'app-search',
