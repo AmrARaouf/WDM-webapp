@@ -1,20 +1,36 @@
-<h2>{{patient?.name}}</h2>
+<h2>{{patient?.firstName}} {{patient?.lastName}}</h2>
+
+<button class="btn-primary" routerLink="/wound/new">Neu Wund</button>
+<br>
+
 <tr *ngFor="let wound of patient?.wounds">     
     <h2>{{ wound.position }} : {{ wound._id }} </h2> 
     <br>
     <td *ngFor="let doc of wound.documentations">
        {{ doc.date }} : {{ doc.length }} / {{ doc.width }}
-       <img [src]="doc.img" />
+       <img src="http://localhost:3000/uploads/c107a67a8642b9bab7917ebcd3447272" style="width:400px;height:300px"/>
        <br>
     </td>
     <br>
 </tr>
 
-<br>
--------------------------------------------
-
-<h2>{{patient?._id}}</h2>
-
-<div>
-    <qr-code [value]="patient?._id" [size]="150"></qr-code>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Wundart</th>
+      <th>Wundursache</th>
+      <th>Wundlokalisation</th>
+      <th>QR Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let wound of patient?.wounds |filter:term">
+      <td><a [routerLink]="['/wound', wound._id]" >{{wound._id}}</a></td>
+      <td>{{wound.reason}}</td>
+      <td>{{wound.type}}</td>
+      <td>{{wound.position}}</td>
+      <td><qr-code [value]="wound?._id" [size]="150"></qr-code></td>
+    </tr>
+  </tbody>
+</table>
