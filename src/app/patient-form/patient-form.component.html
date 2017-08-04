@@ -1,3 +1,54 @@
-<p>
-  patient-form works!
-</p>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+  
+    <h1>Neu/e Patient/in</h1>
+    <form [formGroup]="patientForm" novalidate (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="">Nachname</label>
+        <input type="text" class="form-control" formControlName="lastName">
+      </div>
+
+      <div class="form-group">
+        <label for="">Vorname</label>
+        <input type="text" class="form-control" formControlName="firstName">
+      </div>
+
+      <div class="form-group">
+        <label for="">Wohnbereich</label>
+        <input type="text" class="form-control" formControlName="address">
+      </div>
+
+      <div class="form-group">
+        <label for="">Geburtsdatum</label>
+        <my-date-picker [options]="myDatePickerOptions" formControlName="birthdate"></my-date-picker>
+      </div>
+
+      <div class="form-group">
+        <label for="">Datum der Erhebung</label>
+        <my-date-picker [options]="myDatePickerOptions" formControlName="creationDate"></my-date-picker>
+      </div>
+
+      <div class="form-group">
+        <label for="">Ort der Entstehung</label>
+
+        <div class="radio">
+          <label for="reference">
+            <input type="radio" value="true" name="reference" formControlName="reference">
+            Einrichtung
+          </label>
+        </div>
+
+        <div class="radio">
+          <label for="reference">
+            <input type="radio" value="false" name="reference" formControlName="reference">
+            Extern
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default">Submit</button>
+
+    </form>
+  </div>
+</div>

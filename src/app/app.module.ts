@@ -2,13 +2,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 
 // npm modules
 import { QRCodeModule } from 'angular2-qrcode';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ChartsModule } from 'ng2-charts';
+import { MyDatePickerModule } from 'mydatepicker';
 
 // routes
 import { ROUTES } from '@app/routes';
@@ -40,10 +41,12 @@ import { WoundFormComponent } from '@app/wound-form/wound-form.component';
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     QRCodeModule,
     FileUploadModule,
     ChartsModule,
+    MyDatePickerModule
   ],
   providers: [
     PatientService,
