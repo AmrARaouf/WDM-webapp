@@ -1,21 +1,21 @@
-<button class="btn-primary" routerLink="/patient/new">Create new Patient</button>
-
-<input type="text" [(ngModel)]="term" placeholder="search patients">
+<button class="btn-primary" routerLink="/patient/new">Neu/e Patient/in</button>
+<br>
+<input type="text" [(ngModel)]="term" placeholder="Suche Patienten">
   <table class="table">
   <thead>
     <tr>
-      <th>Patient Name</th>
-      <th>Patient address</th>
-      <th>Reference Type</th>
-      <th>Patient Birthday</th>
-      <th>Admission Date</th>
+      <th>Name</th>
+      <th>Wohnbereich</th>
+      <th>Ort der Entstehung</th>
+      <th>Geburtsdatum</th>
+      <th>Datum der Erhebung</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor = "let patient of patients |filter:term">
       <td><a [routerLink]="['/patient', patient._id]" >{{patient.firstName}} {{patient.lastName}}</a></td>
       <td>{{patient.address}}</td>
-      <td>{{patient.reference}}</td>
+      <td>{{!!patient.reference ? "Einrichtung" : "Extern"}}</td>
       <td>{{patient.birthdate}}</td>
       <td>{{patient.creationDate}}</td>
     </tr>
