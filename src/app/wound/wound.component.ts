@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { WoundService } from '@app/_services/wound.service'
 import { environment } from '@env/environment'
 import * as jsPDF from 'jspdf'
-import  * as qr from 'qr-encode'
+import  * as qr from 'qrcode'
 
 @Component({
   selector: 'app-wound',
@@ -22,13 +22,16 @@ export class WoundComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe( params => {
-      var woundId = params['id'];
+      var woundId = params['woundId'];
       this.woundService.getWound(woundId).subscribe( wound => {this.wound = wound; console.log(wound)} );
     })
   }
 
   downloadQRCode() {
-    var dataURI = qr(this.wound._id, {type: 6, size: 6, level: 'Q'})
+    var dataURI;
+    qr.toDataURL(this.wound._id, function (err, url) {
+      dataURI =  url;
+    });
 
     var doc = new jsPDF();
     doc.text(35, 25, this.wound._id);

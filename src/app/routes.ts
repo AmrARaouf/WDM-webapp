@@ -10,8 +10,8 @@ import { UploadComponent } from '@app/upload/upload.component'
 export const ROUTES: Routes = [
   { path: '', component: SearchComponent },
   { path: 'patient/new', component: PatientFormComponent },
-  { path: 'patient/:id', component: PatientComponent },
-  { path: 'wound/new', component: WoundFormComponent },
-  { path: 'wound/:id', component: WoundComponent },
+  { path: 'patient/:patientId', component: PatientComponent },
+  { path: 'patient/:patientId/wound/new', component: WoundFormComponent },
+  { path: 'patient/:patientId/wound/:woundId', component: WoundComponent },
   { path: 'upload', component: UploadComponent }
 ];

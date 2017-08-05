@@ -34,6 +34,7 @@
     "ng2-search-filter": "^0.3.1",
     "ngx-bootstrap": "^1.8.1",
     "qr-encode": "^0.3.0",
+    "qrcode": "^0.9.0",
     "rxjs": "^5.1.0",
     "typings": "^2.1.1",
     "zone.js": "^0.8.4"

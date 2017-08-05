@@ -18,8 +18,8 @@ export class PatientComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe( params => {
-      var patientId = params['id'];
-      this.patientService.getPatient(patientId).subscribe( patient => {this.patient = patient; console.log(patient.wounds);} );
+      var patientId = params['patientId'];
+      this.patientService.getPatient(patientId).subscribe( patient => this.patient = patient );
     })
   }
 }

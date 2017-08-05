@@ -1,3 +1,56 @@
-<p>
-  wound-form works!
-</p>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+
+    <h1 class="text-center">Neu Wund</h1>
+    <form [formGroup]="woundForm" novalidate (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Wundart</label>
+            <div class="radio" *ngFor="let type of WOUND_TYPES">
+              <label>
+                <input type="radio" name="type" formControlName="type" [value]="type">
+                {{ type }}
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="type" formControlName="type">
+                <input type="text" class="form-control" formControlName="type" placeholder="Sonstige..">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Wundursuche</label>
+            <div class="radio" *ngFor="let reason of WOUND_REASONS">
+              <label>
+                <input type="radio" name="reason" formControlName="reason" [value]="reason">
+                {{ reason }}
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="reason" formControlName="reason">
+                <input type="text" class="form-control" formControlName="reason" placeholder="Sonstige..">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Wundlokalisation</label>
+        <input type="text" class="form-control" formControlName="position" placeholder="Wundlokalisation">
+      </div>
+
+      <button type="submit" class="btn btn-default">Submit</button>
+
+    </form>
+  </div>
+</div>

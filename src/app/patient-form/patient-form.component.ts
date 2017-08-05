@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Patient } from '@models/Patient';
 import { PatientService } from '@app/_services/patient.service'
 
-import {IMyDpOptions} from 'mydatepicker';
+import { IMyDpOptions } from 'mydatepicker';
 
 
 @Component({
