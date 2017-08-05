@@ -6,6 +6,7 @@ import 'rxjs/Rx';
 import { Observable } from "rxjs";
 
 import { environment } from '@env/environment'
+import { Wound } from '@models/Wound';
 
 @Injectable()
 export class WoundService {
@@ -15,6 +16,16 @@ export class WoundService {
   public fileUploader:FileUploader = new FileUploader({url: this.apiUrl+'/wounds'});
 
   constructor(private http: Http) { }
+
+  createWound(patientId: number, wound: Wound): Observable<Wound> {
+    var payload = {
+      "patientId": patientId,
+      "wound": wound
+    };
+    return this.http.post(`${this.apiUrl}/wound`, JSON.stringify(payload), {headers: this.headers})
+      .map( (response: Response) => response.json().wound )
+      .catch(this.handleError);
+  }
 
   handleError(error: Response): Observable<any> {
     return Observable.throw(error);
