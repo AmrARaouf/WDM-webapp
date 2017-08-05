@@ -2,7 +2,7 @@
 
   <h2>{{patient?.firstName}} {{patient?.lastName}}</h2>
 
-  <button class="btn btn-primary" routerLink="/wound/new">Neu Wund</button>
+  <button class="btn btn-primary" [routerLink]="['/patient', patient?._id,'wound', 'new']">Neu Wund</button>
   <br>
 
   <tr *ngFor="let wound of patient?.wounds">     
@@ -30,7 +30,7 @@
 
     <tbody>
       <tr *ngFor="let wound of patient?.wounds | filter:term">
-        <td><a [routerLink]="['/wound', wound._id]" >{{wound._id}}</a></td>
+        <td><a [routerLink]="['/patient', patient._id,'wound', wound._id]" >{{wound._id}}</a></td>
         <td>{{wound.reason}}</td>
         <td>{{wound.type}}</td>
         <td>{{wound.position}}</td>
