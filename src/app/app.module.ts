@@ -10,6 +10,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ChartsModule } from 'ng2-charts';
 import { MyDatePickerModule } from 'mydatepicker';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 // routes
 import { ROUTES } from '@app/routes';
@@ -46,7 +47,8 @@ import { WoundFormComponent } from '@app/wound-form/wound-form.component';
     QRCodeModule,
     FileUploadModule,
     ChartsModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     PatientService,

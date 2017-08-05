@@ -29,8 +29,10 @@
     "mydatepicker": "^2.0.26",
     "ng2-charts": "^1.6.0",
     "ng2-file-upload": "^1.2.1",
+    "ng2-search-filter": "^0.3.1",
     "ngx-bootstrap": "^1.8.1",
     "rxjs": "^5.1.0",
+    "typings": "^2.1.1",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
