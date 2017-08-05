@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { WoundService } from '@app/_services/wound.service'
 import { environment } from '@env/environment'
+import * as jsPDF from 'jspdf'
+import  * as qr from 'qr-encode'
 
 @Component({
   selector: 'app-wound',
@@ -25,4 +27,14 @@ export class WoundComponent implements OnInit {
     })
   }
 
+  downloadQRCode() {
+    var dataURI = qr(this.wound._id, {type: 6, size: 6, level: 'Q'})
+
+    var doc = new jsPDF();
+    doc.text(35, 25, this.wound._id);
+    doc.addImage(dataURI, 'JPEG', 15, 40, 180, 180);
+    // Save the PDF
+    doc.save(this.wound._id+'.pdf');
+  }
 }
+
