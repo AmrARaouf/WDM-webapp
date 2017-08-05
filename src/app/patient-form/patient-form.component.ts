@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+
+import { Patient } from '@models/Patient';
+import { PatientService } from '@app/_services/patient.service'
 
 import {IMyDpOptions} from 'mydatepicker';
 
@@ -15,7 +19,9 @@ export class PatientFormComponent implements OnInit {
     dateFormat: 'dd.mm.yyyy',
   };
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private patientService: PatientService,
+              private router: Router) { }
 
   ngOnInit() {
     this.patientForm = this.formBuilder.group({
@@ -33,7 +39,10 @@ export class PatientFormComponent implements OnInit {
     var creationDateObject = this.patientForm.get('creationDate').value;
     this.patientForm.patchValue({birthdate: birthdateObject.jsdate});
     this.patientForm.patchValue({creationDate: creationDateObject.jsdate});
-    console.log(this.patientForm.value);
+    var newPatient = <Patient>this.patientForm.value;
+    this.patientService.createPatient(newPatient).subscribe( (patient: Patient) => {
+      this.router.navigate(['/patient', patient._id]);
+    });
   }
 
 }

@@ -5,6 +5,7 @@ import 'rxjs/Rx';
 import { Observable } from "rxjs";
 
 import { environment } from '@env/environment'
+import { Patient } from '@models/Patient';
 
 @Injectable()
 export class PatientService {
@@ -22,6 +23,12 @@ export class PatientService {
 
   getPatient(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/patient/${id}`, {headers: this.headers})
+      .map( (response: Response) => response.json().patient )
+      .catch(this.handleError);
+  }
+
+  createPatient(patient: Patient): Observable<Patient> {
+    return this.http.post(`${this.apiUrl}/patient`, JSON.stringify(patient), {headers: this.headers})
       .map( (response: Response) => response.json().patient )
       .catch(this.handleError);
   }
