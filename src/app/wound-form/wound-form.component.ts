@@ -37,12 +37,9 @@ export class WoundFormComponent implements OnInit {
       var newWound = <Wound>this.woundForm.value;
       console.log(patientId, newWound);
       this.woundService.createWound(patientId, newWound).subscribe( (wound: Wound) => {
-        console.log(wound);
+        this.router.navigate(['/patient', patientId]);
       });
     })
-    /*this.patientService.createPatient(newPatient).subscribe( (patient: Patient) => {
-      this.router.navigate(['/patient', patient._id]);
-    });*/
   }
 
 }
