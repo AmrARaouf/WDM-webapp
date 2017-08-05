@@ -1,4 +1,5 @@
 export class Documentation {
+  _id: string;
   date: number;
   length: number;
   width: number;
