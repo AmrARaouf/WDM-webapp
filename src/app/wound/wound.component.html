@@ -1,3 +1,53 @@
-<p>
-  wound works!
-</p>
+<div class="container">
+  <h3>Wound {{ wound?.position }} : {{ wound?._id }}</h3>
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#size">Size</a></li>
+    <li><a data-toggle="pill" href="#affectedTissue">issue</a></li>
+    <li><a data-toggle="pill" href="#color">color</a></li>
+    <li><a data-toggle="pill" href="#exsudat">exsudat</a></li>
+    <li><a data-toggle="pill" href="#edge">edge</a></li>
+    <li><a data-toggle="pill" href="#symptoms">symptoms</a></li>
+    <li><a data-toggle="pill" href="#assessment">assessment</a></li>
+    <li><a data-toggle="pill" href="#comment">comment</a></li>
+    <li><a data-toggle="pill" href="#img">img</a></li>
+  </ul>
+  
+  <div class="tab-content">
+
+    <div id="size" class="tab-pane fade in active">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Length</th>
+              <th>Width</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doc of wound?.documentations">
+               <td>{{ doc.date }}</td> 
+               <td>{{ doc.length }}</td>
+               <td>{{ doc.width }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div id="img" class="tab-pane fade in active">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Img</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doc of wound?.documentations">
+               <td>{{ doc.date }}</td> 
+               <td><img [src]="apiUrl + '/' + doc.img" style="width:400px;height:300px"/></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+</div>

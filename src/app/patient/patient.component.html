@@ -2,19 +2,7 @@
 
   <h2>{{patient?.firstName}} {{patient?.lastName}}</h2>
 
-  <button class="btn btn-primary" [routerLink]="['/patient', patient?._id,'wound', 'new']">Neu Wund</button>
-  <br>
-
-  <tr *ngFor="let wound of patient?.wounds">     
-      <h2>{{ wound.position }} : {{ wound._id }} </h2> 
-      <br>
-      <td *ngFor="let doc of wound.documentations">
-         {{ doc.date }} : {{ doc.length }} / {{ doc.width }}
-         <img [src]="apiUrl + doc.img" style="width:400px;height:300px"/>
-         <br>
-      </td>
-      <br>
-  </tr>
+  <button class="btn btn-primary" routerLink="/wound/new">Neu Wund</button>
 
   <table class="table">
 
