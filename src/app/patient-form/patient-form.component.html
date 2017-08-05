@@ -1,32 +1,32 @@
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-  
+
     <h1>Neu/e Patient/in</h1>
     <form [formGroup]="patientForm" novalidate (ngSubmit)="onSubmit()">
 
       <div class="form-group">
         <label for="">Nachname</label>
-        <input type="text" class="form-control" formControlName="lastName">
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Nachname">
       </div>
 
       <div class="form-group">
         <label for="">Vorname</label>
-        <input type="text" class="form-control" formControlName="firstName">
+        <input type="text" class="form-control" formControlName="firstName" placeholder="Vorname">
       </div>
 
       <div class="form-group">
         <label for="">Wohnbereich</label>
-        <input type="text" class="form-control" formControlName="address">
+        <input type="text" class="form-control" formControlName="address" placeholder="Wohnbereich">
       </div>
 
       <div class="form-group">
         <label for="">Geburtsdatum</label>
-        <my-date-picker [options]="myDatePickerOptions" formControlName="birthdate"></my-date-picker>
+        <my-date-picker [options]="myDatePickerOptions" formControlName="birthdate" placeholder="Geburtsdatum"></my-date-picker>
       </div>
 
       <div class="form-group">
         <label for="">Datum der Erhebung</label>
-        <my-date-picker [options]="myDatePickerOptions" formControlName="creationDate"></my-date-picker>
+        <my-date-picker [options]="myDatePickerOptions" formControlName="creationDate" placeholder="Datum der Erhebung"></my-date-picker>
       </div>
 
       <div class="form-group">
