@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { WoundService } from '@app/_services/wound.service'
+import { PatientService } from '@app/_services/patient.service'
 import { environment } from '@env/environment'
+
+import { Wound } from '@models/Wound';
+import { Patient } from '@models/Patient';
+
 import * as jsPDF from 'jspdf'
 import  * as qr from 'qrcode'
 
@@ -13,31 +18,34 @@ import  * as qr from 'qrcode'
 })
 export class WoundComponent implements OnInit {
 
-  private wound;
+  private wound: Wound;
+  private patient: Patient;
   private apiUrl: string = environment.apiUrl;
 
   constructor(
     private route: ActivatedRoute,
-    private woundService: WoundService) { }
+    private woundService: WoundService,
+    private patientService: PatientService) { }
 
   ngOnInit() {
     this.route.params.subscribe( params => {
       var woundId = params['woundId'];
-      this.woundService.getWound(woundId).subscribe( wound => {this.wound = wound; console.log(wound)} );
+      var patientId = params['patientId'];
+      this.woundService.getWound(woundId).subscribe( (wound: Wound) => this.wound = wound );
+      this.patientService.getPatient(patientId).subscribe( (patient: Patient) => this.patient = patient );
     })
   }
 
   downloadQRCode() {
-    var dataURI;
+    var self = this;
     qr.toDataURL(this.wound._id, function (err, url) {
-      dataURI =  url;
+      var doc = new jsPDF();
+      doc.setFontSize(25);
+      doc.text(35, 25, `Patient/in: ${self.patient.firstName} ${self.patient.lastName}`);
+      doc.text(35, 38, `Wund: ${self.wound.position}`);
+      doc.addImage(url, 'JPEG', 15, 45, 180, 180);
+      doc.save(`${self.patient.firstName}-${self.patient.lastName}-${self.wound.position}.pdf`);
     });
-
-    var doc = new jsPDF();
-    doc.text(35, 25, this.wound._id);
-    doc.addImage(dataURI, 'JPEG', 15, 40, 180, 180);
-    // Save the PDF
-    doc.save(this.wound._id+'.pdf');
   }
 }
 
