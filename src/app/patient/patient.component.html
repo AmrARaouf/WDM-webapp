@@ -3,17 +3,6 @@
 <button class="btn-primary" routerLink="/wound/new">Neu Wund</button>
 <br>
 
-<tr *ngFor="let wound of patient?.wounds">     
-    <h2>{{ wound.position }} : {{ wound._id }} </h2> 
-    <br>
-    <td *ngFor="let doc of wound.documentations">
-       {{ doc.date }} : {{ doc.length }} / {{ doc.width }}
-       <img src="http://localhost:3000/uploads/c107a67a8642b9bab7917ebcd3447272" style="width:400px;height:300px"/>
-       <br>
-    </td>
-    <br>
-</tr>
-
 <table class="table">
   <thead>
     <tr>

@@ -20,4 +20,10 @@ export class WoundService {
     return Observable.throw(error);
   }
 
+  getWound(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/wound/${id}`, {headers: this.headers})
+      .map( (response: Response) => response.json().wound )
+      .catch(this.handleError);
+  }
+
 }
