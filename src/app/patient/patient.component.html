@@ -2,7 +2,7 @@
 
   <h2>{{patient?.firstName}} {{patient?.lastName}}</h2>
 
-  <button class="btn btn-primary" routerLink="/wound/new">Neu Wund</button>
+  <button class="btn btn-primary" [routerLink]="['/patient', patient?._id,'wound', 'new']">Neu Wund</button>
 
   <table class="table">
 
