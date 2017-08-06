@@ -42,7 +42,7 @@ export class WoundComponent implements OnInit {
       var doc = new jsPDF();
       doc.setFontSize(25);
       doc.text(35, 25, `Patient/in: ${self.patient.firstName} ${self.patient.lastName}`);
-      doc.text(35, 38, `Wund: ${self.wound.position}`);
+      doc.text(35, 38, `Wundlokalisation: ${self.wound.position}`);
       doc.addImage(url, 'JPEG', 15, 45, 180, 180);
       doc.save(`${self.patient.firstName}-${self.patient.lastName}-${self.wound.position}.pdf`);
     });

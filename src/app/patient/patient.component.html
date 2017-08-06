@@ -2,6 +2,8 @@
 
   <h2>{{patient?.firstName}} {{patient?.lastName}}</h2>
 
+  <button class="btn btn-primary" [disabled]="!patient" (click)="downloadAllQRCode()">Alle Wunde QR-code herunterladen</button>
+
   <button class="btn btn-primary" [routerLink]="['/patient', patient?._id,'wound', 'new']">Neu Wund</button>
 
   <table class="table">
@@ -12,7 +14,7 @@
         <th>Wundart</th>
         <th>Wundursache</th>
         <th>Wundlokalisation</th>
-        <th>QR Code</th>
+        <!--th>QR Code</th-->
       </tr>
     </thead>
 
@@ -22,7 +24,7 @@
         <td>{{wound.reason}}</td>
         <td>{{wound.type}}</td>
         <td>{{wound.position}}</td>
-        <td><qr-code [value]="wound?._id" [size]="150"></qr-code></td>
+        <!--td><qr-code [value]="wound?._id" [size]="150"></qr-code></td-->
       </tr>
     </tbody>
 
