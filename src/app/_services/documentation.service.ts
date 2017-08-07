@@ -1,0 +1,37 @@
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from "@angular/http";
+
+import 'rxjs/Rx';
+import { Observable } from "rxjs";
+
+import { environment } from '@env/environment'
+import { Documentation } from '@models/Documentation';
+
+@Injectable()
+export class DocumentationService {
+
+  public apiUrl: string = environment.apiUrl;
+  private headers: Headers = new Headers({'Content-Type': 'application/json'});
+
+  constructor(private http: Http) { }
+
+  editDocumentation(documentationId: number, documentation: Documentation): Observable<Documentation> {
+    var payload = {
+      "documentation": documentation
+    };
+    return this.http.post(`${this.apiUrl}/documentation/${documentationId}`, JSON.stringify(payload), {headers: this.headers})
+      .map( (response: Response) => response.json().documentation )
+      .catch(this.handleError);
+  }
+
+  handleError(error: Response): Observable<any> {
+    return Observable.throw(error);
+  }
+
+  getDocumentation(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/documentation/${id}`, {headers: this.headers})
+      .map( (response: Response) => response.json().documentation )
+      .catch(this.handleError);
+  }
+
+}

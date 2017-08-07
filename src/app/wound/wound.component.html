@@ -22,6 +22,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Date</th>
               <th>Length</th>
               <th>Width</th>
@@ -29,6 +30,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let doc of wound?.documentations">
+               <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
                <td>{{ doc.date }}</td> 
                <td>{{ doc.length }}</td>
                <td>{{ doc.width }}</td>

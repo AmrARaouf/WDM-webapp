@@ -18,6 +18,7 @@ import { ROUTES } from '@app/routes';
 // services
 import { PatientService } from '@app/_services/patient.service';
 import { WoundService } from '@app/_services/wound.service';
+import { DocumentationService } from '@app/_services/documentation.service';
 
 // components
 import { AppComponent } from '@app/app.component';
@@ -27,6 +28,7 @@ import { UploadComponent } from '@app/upload/upload.component';
 import { PatientFormComponent } from '@app/patient-form/patient-form.component';
 import { WoundComponent } from '@app/wound/wound.component';
 import { WoundFormComponent } from '@app/wound-form/wound-form.component';
+import { DocumentationFormComponent } from './documentation-form/documentation-form.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { WoundFormComponent } from '@app/wound-form/wound-form.component';
     PatientFormComponent,
     WoundComponent,
     WoundFormComponent,
+    DocumentationFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { WoundFormComponent } from '@app/wound-form/wound-form.component';
   ],
   providers: [
     PatientService,
-    WoundService
+    WoundService,
+    DocumentationService
   ],
   bootstrap: [AppComponent]
 })
