@@ -29,6 +29,7 @@ import { PatientFormComponent } from '@app/patient-form/patient-form.component';
 import { WoundComponent } from '@app/wound/wound.component';
 import { WoundFormComponent } from '@app/wound-form/wound-form.component';
 import { DocumentationFormComponent } from './documentation-form/documentation-form.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DocumentationFormComponent } from './documentation-form/documentation-f
     WoundComponent,
     WoundFormComponent,
     DocumentationFormComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

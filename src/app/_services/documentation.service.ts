@@ -34,4 +34,11 @@ export class DocumentationService {
       .catch(this.handleError);
   }
 
+  getDocumentationNotifications(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/notifications`, {headers: this.headers})
+      .map( (response: Response) => response.json().notifications )
+      .catch(this.handleError);
+  }
+
+
 }
