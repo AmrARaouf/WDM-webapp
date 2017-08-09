@@ -5,18 +5,18 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notification (<b>{{ notifications.length }}</b>)</a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bitte füllen Sie die Daten für (<b>{{ notifications.length }}</b>) Wunddokumentationen aus</a>
               <ul class="dropdown-menu notify-drop">
                 <div class="drop-content">
                   <li *ngFor="let note of notifications">
-                    <a [routerLink]="['/patient', note.patientId,'wound', note.woundId, 'documentation', note.documentation._id]">
+                    <a [routerLink]="['/patient', note.patient._id,'wound', note.wound._id, 'documentation', note.documentation._id]">
                       <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="notify-img">
                           <img [src]="apiUrl + '/' + note.documentation.img" style="width:40px;height:30px">
                         </div>
                       </div>
                       <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                          Please do things for {{ note.documentation.length }}
+                          Wunde am "{{ note.wound.position }}" für "{{ note.patient.firstName }} {{ note.patient.lastName }}"
                       </div>
                     </a>
                   </li>

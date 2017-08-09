@@ -1,10 +1,16 @@
 <app-notifications></app-notifications>
 
 <div class="container">
-  <button class="btn btn-primary" routerLink="/patient/new">Neu/e Patient/in</button>
-  <br>
-  <input type="text" class="form-control" [(ngModel)]="term" placeholder="Suche Patienten">
-
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <div class="col-sm-6 col-xs-12">
+        <input type="text" class="form-control" [(ngModel)]="term" placeholder="Suche Patienten">
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <button class="btn btn-primary" routerLink="/patient/new">Neu/e Patient/in</button>
+      </div>
+    </div>
+  </div>
   <table class="table">
 
     <thead>

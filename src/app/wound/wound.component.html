@@ -2,20 +2,20 @@
 
 <div class="container">
 
-  <h3>Wound {{ wound?.position }}</h3>
+  <h3>Wund am "{{ wound?.position }}"</h3>
 
   <button class="btn btn-primary" [disabled]="!wound || !patient" (click)="downloadQRCode()">Wund QR-code herunterladen</button>
 
   <ul class="nav nav-pills">
-    <li class="active"><a data-toggle="pill" href="#size">Size</a></li>
-    <li><a data-toggle="pill" href="#affectedTissue">issue</a></li>
-    <li><a data-toggle="pill" href="#color">color</a></li>
-    <li><a data-toggle="pill" href="#exsudat">exsudat</a></li>
-    <li><a data-toggle="pill" href="#edge">edge</a></li>
-    <li><a data-toggle="pill" href="#symptoms">symptoms</a></li>
-    <li><a data-toggle="pill" href="#assessment">assessment</a></li>
-    <li><a data-toggle="pill" href="#comment">comment</a></li>
-    <li><a data-toggle="pill" href="#img">img</a></li>
+    <li class="active"><a data-toggle="pill" href="#size">Größe</a></li>
+    <li><a data-toggle="pill" href="#affectedTissue">Betroffene Gewebsstruktu</a></li>
+    <li><a data-toggle="pill" href="#color">Wundzustand</a></li>
+    <li><a data-toggle="pill" href="#exsudat">Wundexsudat</a></li>
+    <li><a data-toggle="pill" href="#edge">Wundrand</a></li>
+    <li><a data-toggle="pill" href="#symptoms">Weitere Symptomatik</a></li>
+    <li><a data-toggle="pill" href="#assessment">Wundbeurteilung</a></li>
+    <li><a data-toggle="pill" href="#comment">Bemerkung</a></li>
+    <li><a data-toggle="pill" href="#img">Bild</a></li>
   </ul>
   
   <div class="tab-content">
@@ -25,9 +25,9 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Date</th>
-              <th>Length</th>
-              <th>Width</th>
+              <th>Datum</th>
+              <th>Länge</th>
+              <th>Breite</th>
             </tr>
           </thead>
           <tbody>
@@ -42,20 +42,27 @@
     </div>
 
     <div id="img" class="tab-pane fade in active">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Img</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let doc of wound?.documentations">
-               <td>{{ doc.date }}</td> 
-               <td><img [src]="apiUrl + '/' + doc.img" style="width:400px;height:300px"/></td>
-            </tr>
-          </tbody>
-        </table>
+        <div id="carouselId" class="carousel slide" data-ride="carousel" style="width:600px">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item" [class.active]="isFirst" *ngFor="let doc of wound?.documentations; let isFirst = first">
+              <img [src]="apiUrl + '/' + doc.img" style="width:600px;height:450px"/>
+              <div class="carousel-caption">
+                <h3>{{ doc.date }}</h3>
+              </div>
+            </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#carouselId" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Nächste</span>
+          </a>
+          <a class="right carousel-control" href="#carouselId" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Nächste</span>
+          </a>
+        </div>
     </div>
+
 
 </div>
