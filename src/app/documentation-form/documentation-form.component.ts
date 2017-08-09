@@ -37,8 +37,7 @@ export class DocumentationFormComponent implements OnInit {
       this.DOCUMENTATION_ASSESSMENT = DOCUMENTATION_ASSESSMENT;
     this.route.params.subscribe( params => {
       var documentationId = params['documentationId'];
-      this.documentationService.getDocumentation(documentationId).subscribe( (documentation: Documentation) => {this.documentation = documentation;
-          console.log("doc in form:" + documentation.affectedTissue);} );
+      this.documentationService.getDocumentation(documentationId).subscribe( (documentation: Documentation) => this.documentation = documentation );
     });    
     this.documentationForm = this.formBuilder.group({
       affectedTissue: [null, Validators.required],

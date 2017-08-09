@@ -11,6 +11,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ChartsModule } from 'ng2-charts';
 import { MyDatePickerModule } from 'mydatepicker';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 
 // routes
 import { ROUTES } from '@app/routes';
@@ -53,7 +54,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     FileUploadModule,
     ChartsModule,
     MyDatePickerModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    Ng2BreadcrumbModule.forRoot()
   ],
   providers: [
     PatientService,

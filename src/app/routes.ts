@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
 
 import { SearchComponent } from '@app/search/search.component'
 import { PatientComponent } from '@app/patient/patient.component'
