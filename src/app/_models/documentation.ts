@@ -1,6 +1,6 @@
 export class Documentation {
   _id: string;
-  date: number;
+  date: Date;
   length: number;
   width: number;
   affectedTissue: number;
@@ -11,4 +11,19 @@ export class Documentation {
   assessment: number;
   comment: string;
   img: string;
+
+  constructor() {
+    this._id = "";
+    this.date = new Date();
+    length = 0;
+    width = 0;
+    affectedTissue = 0;
+    color = 0;
+    exsadat = 0;
+    edge = [];
+    symptoms = [];
+    assessment = 0;
+    comment = '';
+    img = '';
+  }
 };
