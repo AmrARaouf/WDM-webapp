@@ -1,6 +1,6 @@
 <app-notifications></app-notifications>
 
-<div class="container">
+<div class="container" *ngIf="isDataAvailable">
 
   <h3>Wund am "{{ wound?.position }}"</h3>
 
@@ -21,24 +21,39 @@
   <div class="tab-content">
 
     <div id="size" class="tab-pane fade in active">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Datum</th>
-              <th>Länge</th>
-              <th>Breite</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let doc of wound?.documentations">
-               <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
-               <td>{{ doc.date }}</td> 
-               <td>{{ doc.length }}</td>
-               <td>{{ doc.width }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="400"
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        legend="True"
+                        chartType="line">
+            </canvas>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Länge</th>
+                <th>Breite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date }}</td> 
+                 <td>{{ doc.length }}</td>
+                 <td>{{ doc.width }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <div id="img" class="tab-pane fade in active">

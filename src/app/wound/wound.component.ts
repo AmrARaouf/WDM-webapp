@@ -17,7 +17,9 @@ import  * as qr from 'qrcode'
   styles: []
 })
 export class WoundComponent implements OnInit {
-
+  private lineChartData:Array<any> = [];
+  public lineChartLabels:Array<any> = [];
+  private isDataAvailable:boolean = false;
   private wound: Wound;
   private patient: Patient;
   private apiUrl: string = environment.apiUrl;
@@ -31,7 +33,21 @@ export class WoundComponent implements OnInit {
     this.route.params.subscribe( params => {
       var woundId = params['woundId'];
       var patientId = params['patientId'];
-      this.woundService.getWound(woundId).subscribe( (wound: Wound) => this.wound = wound );
+      this.woundService.getWound(woundId).subscribe( (wound: Wound) => {
+        this.wound = wound;
+        var length = [];
+        var width = [];
+        for (let doc of this.wound.documentations) {
+          length.push(doc.length);
+          width.push(doc.width);
+          this.lineChartLabels.push(doc.date);
+        }
+        this.lineChartData.push({data: length, label: 'Länge'});
+        this.lineChartData.push({data: width, label: 'Breite'});
+
+        console.log(this.lineChartData);
+        this.isDataAvailable = true;
+      } );
       this.patientService.getPatient(patientId).subscribe( (patient: Patient) => this.patient = patient );
     })
   }

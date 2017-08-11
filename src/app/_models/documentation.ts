@@ -15,15 +15,15 @@ export class Documentation {
   constructor() {
     this._id = "";
     this.date = new Date();
-    length = 0;
-    width = 0;
-    affectedTissue = 0;
-    color = 0;
-    exsadat = 0;
-    edge = [];
-    symptoms = [];
-    assessment = 0;
-    comment = '';
-    img = '';
+    this.length = 0;
+    this.width = 0;
+    this.affectedTissue = 0;
+    this.color = 0;
+    this.exsudat = 0;
+    this.edge = [0];
+    this.symptoms = [0];
+    this.assessment = 0;
+    this.comment = '';
+    this.img = '';
   }
 };
