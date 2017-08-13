@@ -6,7 +6,7 @@ export class Documentation {
   affectedTissue: number;
   color: number;
   exsudat: number;
-  edge: string[];
+  edges: string[];
   symptoms: string[];
   assessment: number;
   comment: string;
@@ -20,7 +20,7 @@ export class Documentation {
     this.affectedTissue = 0;
     this.color = 0;
     this.exsudat = 0;
-    this.edge = [];
+    this.edges = [];
     this.symptoms = [];
     this.assessment = 0;
     this.comment = '';

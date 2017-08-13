@@ -9,6 +9,8 @@ import { environment } from '@env/environment'
 import { Wound } from '@models/Wound';
 import { Patient } from '@models/Patient';
 
+import { WOUND_POSITIONS} from '@app/app.constants';
+
 import * as jsPDF from 'jspdf'
 import  * as qr from 'qrcode'
 
@@ -18,6 +20,7 @@ import  * as qr from 'qrcode'
   styles: []
 })
 export class WoundComponent implements OnInit {
+  private WOUND_POSITIONS: object;
   private lengthWidthChartData:Array<any> = [];
   private colorChartData:Array<any> = [];
   private affectedTissueChartData: Array<any> = [];
@@ -56,10 +59,16 @@ export class WoundComponent implements OnInit {
     private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.WOUND_POSITIONS = WOUND_POSITIONS;
     this.route.params.subscribe( params => {
       var woundId: string = params['woundId'];
       var patientId: string = params['patientId'];
-      this.patientService.getPatient(patientId).subscribe( (patient: Patient) => {this.patient = patient; this.isPatientDataAvailable = true;} );
+
+      this.patientService.getPatient(patientId).subscribe( (patient: Patient) => {
+        this.patient = patient;
+        this.isPatientDataAvailable = true;
+      });
+
       this.woundService.getWound(woundId).subscribe( (wound: Wound) => {
         this.wound = wound;
         var length = [];

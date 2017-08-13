@@ -33,12 +33,13 @@ export class DocumentationFormComponent implements OnInit {
 
   ngOnInit() {
     this.initPageConstants();
-    this.initDocumentationForm();
-
+    
     this.route.params.subscribe( params => {
       var documentationId = params['documentationId'];
       this.documentationService.getDocumentation(documentationId).subscribe( (documentation: Documentation) => {
         this.documentation = documentation;
+        console.log(documentation);
+        this.initDocumentationForm();
       });
     });    
   }
@@ -86,20 +87,14 @@ export class DocumentationFormComponent implements OnInit {
 
   private initDocumentationForm() {
     this.documentationForm = this.formBuilder.group({
-      affectedTissue: [null, Validators.required],
-      color: [null, Validators.required],
-      exsudat: [null, Validators.required],
-      edges: [[]],
-      symptoms: [[]],
-      assessment: [null, Validators.required],
-      comment: [""]
+      affectedTissue: [this.documentation.affectedTissue || null, Validators.required],
+      color: [this.documentation.color || null, Validators.required],
+      exsudat: [this.documentation.exsudat || null, Validators.required],
+      edges: [this.documentation.edges || []],
+      symptoms: [this.documentation.symptoms || []],
+      assessment: [this.documentation.assessment || null, Validators.required],
+      comment: [this.documentation.comment || ""]
     });
   }
-
-  foo() {
-    var newDocumentation = <Documentation>this.documentationForm.value;
-    console.log(newDocumentation);
-  }
-
 
 }

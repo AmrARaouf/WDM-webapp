@@ -1,27 +1,29 @@
 <app-notifications></app-notifications>
 
-<div class="row">
+<div *ngIf="documentation" class="row">
   <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
 
     <h1 class="text-center">Wunddokumentation</h1>
 
-    <div id="size" class="tab-pane fade in active">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Datum</th>
-              <th>Länge</th>
-              <th>Breite</th>
-              <th>Bild</th>
-            </tr>
-          </thead>
-          <tbody>
-              <td>{{ documentation?.date }}</td> 
-              <td>{{ documentation?.length }}</td>
-              <td>{{ documentation?.width }}</td>
-              <td><img *ngIf="documentation" [src]="apiUrl + '/' + documentation.img" style="width:400px;height:300px"/></td>
-          </tbody>
-        </table>
+    <div class="row wound-given-data margin-bottom-24">
+      <div class="col-sm-6">
+        <img [src]="apiUrl + '/' + documentation.img" width="100%"/>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Datum</label>
+          <div>{{ documentation?.date | date:"medium" }}</div>
+        </div> 
+        <div class="form-group">
+          <label>Länge</label>
+          <div>{{ documentation?.length }}</div>
+        </div>
+        <div class="form-group">
+          <label>Breite</label>
+          <div>{{ documentation?.width }}</div>
+        </div>
+      </div>
     </div>
 
     <form [formGroup]="documentationForm" novalidate (ngSubmit)="onSubmit()">
@@ -82,7 +84,8 @@
             <label>Wundrand</label>   
             <div class="checkbox" *ngFor="let edge of DOCUMENTATION_EDGE">
               <label>
-                <input type="checkbox" name="edge" (change)="checkEdge($event, edge)">
+                <input [checked]="documentationForm.controls['edges'].value.indexOf(edge) !== -1"
+                  type="checkbox" name="edge" (change)="checkEdge($event, edge)">
                 {{ edge }}
               </label>
             </div>
@@ -94,7 +97,8 @@
             <label>Weitere Symptomatik</label>
             <div class="checkbox" *ngFor="let symptom of DOCUMENTATION_SYMPTOPMS">
               <label>
-                <input type="checkbox" name="symptom" (change)="checkSymptom($event, symptom)">
+                <input [checked]="documentationForm.controls['symptoms'].value.indexOf(symptom) !== -1"
+                  type="checkbox" name="symptom" (change)="checkSymptom($event, symptom)">
                 {{ symptom }}
               </label>
             </div>
@@ -103,11 +107,14 @@
     </div>
 
     <div class="form-group">
-        <label for="">Bemerkung</label>
-        <input type="text" class="form-control" name="comment" formControlName="comment" (change)="foo()">
+      <label for="">Bemerkung</label>
+      <input type="text" class="form-control" name="comment" formControlName="comment" (change)="foo()">
     </div>
 
-    <button type="submit" class="btn btn-default" [disabled]="!documentationForm.valid">Save</button>
+    <button type="submit" class="btn btn-success" [disabled]="!documentationForm.valid">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Speichern
+    </button>
 
     </form>
   </div>

@@ -2,24 +2,30 @@
 
 <div class="container" *ngIf="isWoundDataAvailable && isPatientDataAvailable">
 
-  <h3>Wund am "{{ wound?.position }}"</h3>
+  <h1 class="text-center">Wunde am {{ WOUND_POSITIONS[wound.position + ""] }}</h1>
 
-  <button class="btn btn-primary" [disabled]="!wound || !patient" (click)="downloadQRCode()">Wund QR-code herunterladen</button>
+  <div class="row margin-bottom-24">
+    <div class="col-sm-6 col-sm-offset-6 col-xs-12">
+        <button class="pull-right btn btn-primary" [disabled]="!wound || !patient" (click)="downloadQRCode()">
+          <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+          Wunde QR-code herunterladen
+        </button>
+    </div>
+  </div>
 
-  <ul class="nav nav-pills">
-    <li class="active"><a data-toggle="pill" href="#size">Größe</a></li>
-    <li><a data-toggle="pill" href="#affectedTissue">Betroffene Gewebsstruktu</a></li>
-    <li><a data-toggle="pill" href="#color">Wundzustand</a></li>
-    <li><a data-toggle="pill" href="#exsudat">Wundexsudat</a></li>
-    <li><a data-toggle="pill" href="#edge">Wundrand</a></li>
-    <li><a data-toggle="pill" href="#symptoms">Weitere Symptomatik</a></li>
-    <li><a data-toggle="pill" href="#assessment">Wundbeurteilung</a></li>
-    <li><a data-toggle="pill" href="#comment">Bemerkung</a></li>
-    <li><a data-toggle="pill" href="#img">Bild</a></li>
+  <ul class="nav nav-tabs margin-bottom-12">
+    <li class="active"><a data-toggle="tab" href="#size">Größe</a></li>
+    <li><a data-toggle="tab" href="#affectedTissue">Betroffene Gewebsstruktu</a></li>
+    <li><a data-toggle="tab" href="#color">Wundzustand</a></li>
+    <li><a data-toggle="tab" href="#exsudat">Wundexsudat</a></li>
+    <li><a data-toggle="tab" href="#edge">Wundrand</a></li>
+    <li><a data-toggle="tab" href="#symptoms">Weitere Symptomatik</a></li>
+    <li><a data-toggle="tab" href="#assessment">Wundbeurteilung</a></li>
+    <li><a data-toggle="tab" href="#comment">Bemerkung</a></li>
+    <li><a data-toggle="tab" href="#img">Bild</a></li>
   </ul>
   
   <div class="tab-content">
-
     <div id="size" class="tab-pane fade in active">
       <div class="row">
         <div class="col-md-6">
@@ -270,14 +276,14 @@
     </div>
 
     <div id="img" class="tab-pane fade in">
-        <div id="carouselId" class="carousel slide" data-ride="carousel" style="width:600px">
-          <div class="carousel-inner">
-            <div class="item" [class.active]="isFirst" *ngFor="let doc of wound?.documentations; let isFirst = first">
-              <img [src]="apiUrl + '/' + doc.img" style="width:600px;height:450px"/>
-              <div class="carousel-caption">
-                <h3>{{ doc.date | date:'medium' }}</h3>
-              </div>
+      <div id="carouselId" class="carousel slide" data-ride="carousel" style="width:600px">
+        <div class="carousel-inner">
+          <div class="item" [class.active]="isFirst" *ngFor="let doc of wound?.documentations; let isFirst = first">
+            <img [src]="apiUrl + '/' + doc.img" style="width:600px;height:450px"/>
+            <div class="carousel-caption">
+              <h3>{{ doc.date | date:'medium' }}</h3>
             </div>
+          </div>
 
           <a class="left carousel-control" href="#carouselId" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
@@ -288,7 +294,8 @@
             <span class="sr-only">Nächste</span>
           </a>
         </div>
+      </div>
     </div>
-
+  </div>
 
 </div>
