@@ -1,18 +1,25 @@
 <app-notifications></app-notifications>
 
 <div class="container">
-  <div class="row">
+
+  <h2 class="text-center">Patienten</h2>
+
+  <div class="row margin-bottom-12">
     <div class="col-sm-6 col-xs-12">
-      <div class="col-sm-6 col-xs-12">
-        <input type="text" class="form-control" [(ngModel)]="term" placeholder="Suche Patienten">
-      </div>
-      <div class="col-sm-6 col-xs-12">
-        <button class="btn btn-primary" routerLink="/patient/new">Neu/e Patient/in</button>
-      </div>
+      <button class="btn btn-success" routerLink="/patient/new">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Neu/e Patient/in
+      </button>
     </div>
   </div>
-  <table class="table">
 
+  <div class="row margin-bottom-24">
+    <div class="col-sm-4 col-xs-12">
+      <input type="text" class="form-control" [(ngModel)]="term" placeholder="Suche Patienten">
+    </div>
+  </div>
+
+  <table class="table">
     <thead>
       <tr>
         <th>Name</th>
@@ -32,7 +39,6 @@
         <td>{{patient.creationDate | date}}</td>
       </tr>
     </tbody>
-
   </table>
 
 </div>
