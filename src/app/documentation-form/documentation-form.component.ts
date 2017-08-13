@@ -18,12 +18,13 @@ export class DocumentationFormComponent implements OnInit {
   private apiUrl: string = environment.apiUrl;
   private documentationForm: FormGroup;
   private documentation: Documentation;
-  private DOCUMENTATION_AFFECTED_TISSUE: [string];
-  private DOCUMENTATION_COLOR: [string];
-  private DOCUMENTATION_EXSUDAT: [string];
-  private DOCUMENTATION_EDGE: [string];
-  private DOCUMENTATION_SYMPTOPMS: [string];
-  private DOCUMENTATION_ASSESSMENT: [string];
+
+  private DOCUMENTATION_AFFECTED_TISSUE: object[];
+  private DOCUMENTATION_COLOR: object[];
+  private DOCUMENTATION_EXSUDAT: object[];
+  private DOCUMENTATION_EDGE: string[];
+  private DOCUMENTATION_SYMPTOPMS: string[];
+  private DOCUMENTATION_ASSESSMENT: object[];
 
   constructor(private formBuilder: FormBuilder,
             private documentationService: DocumentationService,
@@ -31,26 +32,35 @@ export class DocumentationFormComponent implements OnInit {
             private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadPageConstants();
-    this.documentationForm = this.formBuilder.group({
-      affectedTissue: [null, Validators.required],
-      color: [null, Validators.required],
-      exsudat: ['1= Keines', Validators.required],
-      edge: [null, Validators.required],
-      symptoms: [null, Validators.required],
-      assessment: [null, Validators.required],
-      comment: ['', Validators.required]
-    });
+    this.initPageConstants();
+    this.initDocumentationForm();
 
     this.route.params.subscribe( params => {
       var documentationId = params['documentationId'];
       this.documentationService.getDocumentation(documentationId).subscribe( (documentation: Documentation) => {
-        console.log(documentation);
         this.documentation = documentation;
-        this.documentationForm.patchValue({'affectedTissue':this.documentation.affectedTissue});
-
       });
     });    
+  }
+
+  checkEdge(event, edge: string) {
+    var selectedEdges = this.documentationForm.controls['edges'].value;
+    if (event.target.checked) {
+      selectedEdges.push(edge);
+    } else {
+      selectedEdges = selectedEdges.filter( currentSymptom => currentSymptom !== edge );
+    }
+    this.documentationForm.controls['edges'].setValue(selectedEdges);
+  }
+
+  checkSymptom(event, symptom: string) {
+    var selectedSymptoms = this.documentationForm.controls['symptoms'].value;
+    if (event.target.checked) {
+      selectedSymptoms.push(symptom);
+    } else {
+      selectedSymptoms = selectedSymptoms.filter( currentSymptom => currentSymptom !== symptom );
+    }
+    this.documentationForm.controls['symptoms'].setValue(selectedSymptoms);
   }
 
   onSubmit() {
@@ -59,20 +69,36 @@ export class DocumentationFormComponent implements OnInit {
       var woundId = params['woundId'];
       var documentationId = params['documentationId'];
       var newDocumentation = <Documentation>this.documentationForm.value;
-      console.log(newDocumentation);
       this.documentationService.editDocumentation(documentationId, newDocumentation).subscribe( (documentation: Documentation) => {
         this.router.navigate(['/patient', patientId, 'wound', woundId]);
       });
     })
   }
 
-  private loadPageConstants() {
+  private initPageConstants() {
     this.DOCUMENTATION_AFFECTED_TISSUE = DOCUMENTATION_AFFECTED_TISSUE;
     this.DOCUMENTATION_COLOR = DOCUMENTATION_COLOR;
     this.DOCUMENTATION_EXSUDAT = DOCUMENTATION_EXSUDAT;
     this.DOCUMENTATION_EDGE = DOCUMENTATION_EDGE; 
     this.DOCUMENTATION_SYMPTOPMS = DOCUMENTATION_SYMPTOPMS;
     this.DOCUMENTATION_ASSESSMENT = DOCUMENTATION_ASSESSMENT;
+  }
+
+  private initDocumentationForm() {
+    this.documentationForm = this.formBuilder.group({
+      affectedTissue: [null, Validators.required],
+      color: [null, Validators.required],
+      exsudat: [null, Validators.required],
+      edges: [[]],
+      symptoms: [[]],
+      assessment: [null, Validators.required],
+      comment: [""]
+    });
+  }
+
+  foo() {
+    var newDocumentation = <Documentation>this.documentationForm.value;
+    console.log(newDocumentation);
   }
 
 

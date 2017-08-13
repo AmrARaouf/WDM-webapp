@@ -13,8 +13,8 @@ import { WoundService } from '@app/_services/wound.service'
 })
 export class WoundFormComponent implements OnInit {
   private woundForm: FormGroup;
-  private WOUND_TYPES: [string];
-  private WOUND_REASONS: [string];
+  private WOUND_TYPES: string[];
+  private WOUND_REASONS: string[];
 
   constructor(private formBuilder: FormBuilder,
             private woundService: WoundService,

@@ -32,8 +32,8 @@
             <label>Betroffene Gewebsstruktu</label>
             <div class="radio" *ngFor="let affectedTissue of DOCUMENTATION_AFFECTED_TISSUE">
               <label>
-                <input type="radio" name="affectedTissue" formControlName="affectedTissue" [value]="affectedTissue">
-                {{ affectedTissue }}
+                <input type="radio" name="affectedTissue" formControlName="affectedTissue" [value]="affectedTissue.value">
+                {{ affectedTissue.label }}
               </label>
             </div>
           </div>
@@ -44,8 +44,8 @@
             <label>Wundzustand</label>
             <div class="radio" *ngFor="let color of DOCUMENTATION_COLOR">
               <label>
-                <input type="radio" name="color" formControlName="color" [value]="color">
-                {{ color }}
+                <input type="radio" name="color" formControlName="color" [value]="color.value">
+                {{ color.label }}
               </label>
             </div>
           </div>
@@ -57,8 +57,8 @@
             <label>Wundexsudat</label>
             <div class="radio" *ngFor="let exsudat of DOCUMENTATION_EXSUDAT">
               <label>
-                <input type="radio" name="exsudat" formControlName="exsudat" [value]="exsudat">
-                {{ exsudat }}
+                <input type="radio" name="exsudat" formControlName="exsudat" [value]="exsudat.value">
+                {{ exsudat.label }}
               </label>
             </div>
           </div>
@@ -69,8 +69,8 @@
             <label>Wundbeurteilung</label>
             <div class="radio" *ngFor="let assessment of DOCUMENTATION_ASSESSMENT">
               <label>
-                <input type="radio" name="assessment" formControlName="assessment" [value]="assessment">
-                {{ assessment }}
+                <input type="radio" name="assessment" formControlName="assessment" [value]="assessment.value">
+                {{ assessment.label }}
               </label>
             </div>
           </div>
@@ -82,7 +82,7 @@
             <label>Wundrand</label>   
             <div class="checkbox" *ngFor="let edge of DOCUMENTATION_EDGE">
               <label>
-                <input type="checkbox" name="edge" formControlName="edge" [value]="edge">
+                <input type="checkbox" name="edge" (change)="checkEdge($event, edge)">
                 {{ edge }}
               </label>
             </div>
@@ -92,10 +92,10 @@
         <div class="col-sm-6 col-xs-12">
           <div class="form-group">
             <label>Weitere Symptomatik</label>
-            <div class="checkbox" *ngFor="let symptoms of DOCUMENTATION_SYMPTOPMS">
+            <div class="checkbox" *ngFor="let symptom of DOCUMENTATION_SYMPTOPMS">
               <label>
-                <input type="checkbox" name="symptoms" formControlName="symptoms" [value]="symptoms">
-                {{ symptoms }}
+                <input type="checkbox" name="symptom" (change)="checkSymptom($event, symptom)">
+                {{ symptom }}
               </label>
             </div>
           </div>
@@ -104,10 +104,10 @@
 
     <div class="form-group">
         <label for="">Bemerkung</label>
-        <input type="text" class="form-control" name="comment" formControlName="comment" [value]="comment">
+        <input type="text" class="form-control" name="comment" formControlName="comment" (change)="foo()">
     </div>
 
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default" [disabled]="!documentationForm.valid">Save</button>
 
     </form>
   </div>

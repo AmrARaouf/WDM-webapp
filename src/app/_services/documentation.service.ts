@@ -24,10 +24,6 @@ export class DocumentationService {
       .catch(this.handleError);
   }
 
-  handleError(error: Response): Observable<any> {
-    return Observable.throw(error);
-  }
-
   getDocumentation(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/documentation/${id}`, {headers: this.headers})
       .map( (response: Response) => response.json().documentation )
@@ -38,6 +34,10 @@ export class DocumentationService {
     return this.http.get(`${this.apiUrl}/notifications`, {headers: this.headers})
       .map( (response: Response) => response.json().notifications )
       .catch(this.handleError);
+  }
+
+  private handleError(error: Response): Observable<any> {
+    return Observable.throw(error);
   }
 
 
