@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@types/jspdf": "^1.1.31",
+    "angular2-number-picker": "^0.8.8",
     "angular2-qrcode": "^2.0.1",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.6.0",

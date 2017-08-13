@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 
+import { CustomValidators } from 'ng2-validation';
+
 import { Wound } from '@models/Wound';
 import { WOUND_TYPES, WOUND_REASONS} from '@app/app.constants';
 import { WoundService } from '@app/_services/wound.service'
@@ -22,16 +24,16 @@ export class WoundFormComponent implements OnInit {
             private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.WOUND_TYPES = WOUND_TYPES;
-    this.WOUND_REASONS = WOUND_REASONS;
-    this.woundForm = this.formBuilder.group({
-      type: ['', Validators.required],
-      reason: ['', Validators.required],
-      position: [null, Validators.required],
-    })
+    this.initPageConstants();
+    this.initDocumentationForm();
+  }
+
+  specialTypeKeypress(event) {
+    this.woundForm.controls['type'].setValue(event.target.value);
   }
 
   onSubmit() {
+    // console.log(this.woundForm.value);
     this.route.params.subscribe( params => {
       var patientId = params['patientId'];
       var newWound = <Wound>this.woundForm.value;
@@ -39,6 +41,19 @@ export class WoundFormComponent implements OnInit {
       this.woundService.createWound(patientId, newWound).subscribe( (wound: Wound) => {
         this.router.navigate(['/patient', patientId]);
       });
+    })
+  }
+
+  private initPageConstants() {
+    this.WOUND_TYPES = WOUND_TYPES;
+    this.WOUND_REASONS = WOUND_REASONS;
+  }
+
+  private initDocumentationForm() {
+    this.woundForm = this.formBuilder.group({
+      type: ['', Validators.required],
+      reason: ['', Validators.required],
+      position: [null, [Validators.required, Validators.pattern(/^\d+$/), CustomValidators.range([1,60])]],
     })
   }
 

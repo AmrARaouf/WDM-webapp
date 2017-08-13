@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
 
-    <h1 class="text-center">Neu Wund</h1>
+    <h1 class="text-center">Neu Wunde</h1>
     <form [formGroup]="woundForm" novalidate (ngSubmit)="onSubmit()">
 
       <div class="row">
@@ -19,8 +19,8 @@
 
             <div class="radio">
               <label>
-                <input type="radio" name="type" formControlName="type">
-                <input type="text" class="form-control" formControlName="type" placeholder="Sonstige..">
+                <input id="specialType" type="radio" name="type" formControlName="type">
+                <input type="text" class="form-control" placeholder="Sonstige.." (keypress)="specialTypeKeypress($event)">
               </label>
             </div>
           </div>
@@ -46,14 +46,20 @@
         </div>
       </div>
 
-      <img src="/assets/images/body.jpg" class="body-img">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label for="">Wundlokalisation [1 - 60]</label>
+            <input type="text" class="form-control" formControlName="position" placeholder="Wundlokalisation">
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label for="">Wundlokalisation</label>
-        <input type="text" class="form-control" formControlName="position" placeholder="Wundlokalisation">
+        <div class="col-sm-6 col-xs-12">
+          <img src="/assets/images/body.jpg" class="body-img">
+        </div>        
       </div>
 
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default" [disabled]="!woundForm.valid">Save</button>
 
     </form>
   </div>
