@@ -8,5 +8,5 @@ export class Patient {
   birthdate: Date;
   creationDate: Date;
   reference: boolean;
-  wounds: [Wound];
+  wounds: Wound[];
 };

@@ -1,4 +1,4 @@
-export const WOUND_TYPES: [string] = [
+export const WOUND_TYPES: string[] = [
   "Venöses Ulcus",
   "Arterielles Ulcus",
   "Venöses u. arterielles (gemischtes) Ulcus",
@@ -13,7 +13,7 @@ export const WOUND_TYPES: [string] = [
   "Rezidiv"
 ];
 
-export const WOUND_REASONS: [string] = [
+export const WOUND_REASONS: string[] = [
   "Trauma",
   "Diabetes mellitus",
   "Arterielle Verschlusskrankheit",
@@ -28,48 +28,48 @@ export const WOUND_REASONS: [string] = [
   "Kachexie"
 ];
 
-export const DOCUMENTATION_AFFECTED_TISSUE: [string] = [
-  "1= Epidermis",
-  "2= Dermis",
-  "3= Subkutis",
-  "4= Faszie, Muskeln, Sehnen",
-  "5= Knochen"
+export const DOCUMENTATION_AFFECTED_TISSUE: object[] = [
+  { value: 1, label: "Epidermis" },
+  { value: 2, label: "Dermis" },
+  { value: 3, label: "Subkutis" },
+  { value: 4, label: "Faszie, Muskeln, Sehnen" },
+  { value: 5, label: "Knochen" }
 ]
 
-export const DOCUMENTATION_COLOR: [string] = [
-  "1= Nekrose (schwarz)",
-  "2= Fibrin (gelb)",
-  "3= Granulation (rot)",
-  "4=Epithel (rosa)"
+export const DOCUMENTATION_COLOR: object[] = [
+  { value: 1, label: "Nekrose (schwarz)" },
+  { value: 2, label: "Fibrin (gelb)" },
+  { value: 3, label: "Granulation (rot)" },
+  { value: 4, label: "Epithel (rosa)" }
 ]
 
-export const DOCUMENTATION_EXSUDAT: [string] = [
-  "1= Keines",
-  "2= Wenig",
-  "3= Mäßig",
-  "4= Viel"
+export const DOCUMENTATION_EXSUDAT: object[] = [
+  { value: 1, label: "Keines" },
+  { value: 2, label: "Wenig" },
+  { value: 3, label: "Mäßig" },
+  { value: 4, label: "Viel" }
 ]
 
-export const DOCUMENTATION_EDGE: [string] = [
-  "1= unauffälig",
-  "2= mazeriert",
-  "3=entzündet, gerötet",
-  "4= ödematös",
-  "5= nekrotisch",
-  "6= besonder-heiten (Taschen, Fisteln)"
+export const DOCUMENTATION_EDGE: string[] = [
+  "Unauffälig",
+  "Mazeriert",
+  "Entzündet, gerötet",
+  "Ödematös",
+  "Nekrotisch",
+  "Besonder-heiten (Taschen, Fisteln)"
 ]
 
-export const DOCUMENTATION_SYMPTOPMS: [string] = [
-  "1= Schmerzen",
-  "2= Ekzeme",
-  "3= Ödem",
-  "4=Infektion",
-  "5= Geruch"
+export const DOCUMENTATION_SYMPTOPMS: string[] = [
+  "Schmerzen",
+  "Ekzeme",
+  "Ödem",
+  "Infektion",
+  "Geruch"
 ]
 
-export const DOCUMENTATION_ASSESSMENT: [string] = [
-  "1= verbessert",
-  "2= unverändert",
-  "3= verschlechtert",
-  "4= abgeheilt"
+export const DOCUMENTATION_ASSESSMENT: object[] = [
+  { value: 1, label: "verbessert" },
+  { value: 2, label: "unverändert" },
+  { value: 3, label: "verschlechtert" },
+  { value: 4, label: "abgeheilt" }
 ]
