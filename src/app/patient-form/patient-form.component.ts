@@ -24,14 +24,7 @@ export class PatientFormComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.patientForm = this.formBuilder.group({
-      lastName: ['', Validators.required],
-      firstName: ['', Validators.required],
-      address: ['', Validators.required],
-      birthdate: [null, Validators.required],
-      creationDate: [null, Validators.required],
-      reference: [null, Validators.required]
-    })
+    this.initPatientForm();
   }
 
   onSubmit() {
@@ -42,6 +35,17 @@ export class PatientFormComponent implements OnInit {
     var newPatient = <Patient>this.patientForm.value;
     this.patientService.createPatient(newPatient).subscribe( (patient: Patient) => {
       this.router.navigate(['/patient', patient._id]);
+    });
+  }
+
+  private initPatientForm() {
+    this.patientForm = this.formBuilder.group({
+      lastName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      address: ['', Validators.required],
+      birthdate: [null, Validators.required],
+      creationDate: [null, Validators.required],
+      reference: [null, Validators.required]
     });
   }
 
