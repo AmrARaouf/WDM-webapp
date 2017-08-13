@@ -1,3 +1,66 @@
-<p>
-  wound-edit works!
-</p>
+<app-notifications></app-notifications>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+
+    <h1 class="text-center">Wunde Bearbeiten</h1>
+    <form *ngIf="wound" [formGroup]="editWoundForm" novalidate (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Wundart</label>
+            <div class="radio" *ngFor="let type of WOUND_TYPES">
+              <label>
+                <input type="radio" name="type" formControlName="type" [value]="type">
+                {{ type }}
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input id="specialType" type="radio" name="type" formControlName="type">
+                <input type="text" class="form-control" placeholder="Sonstige..">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Wundursuche</label>
+            <div class="radio" *ngFor="let reason of WOUND_REASONS">
+              <label>
+                <input type="radio" name="reason" formControlName="reason" [value]="reason">
+                {{ reason }}
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="reason" formControlName="reason">
+                <input type="text" class="form-control" placeholder="Sonstige..">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label for="">Wundlokalisation [1 - 60]</label>
+            <input type="text" class="form-control" formControlName="position" placeholder="Wundlokalisation">
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xs-12">
+          <img src="/assets/images/body.jpg" class="body-img">
+        </div>        
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!editWoundForm.valid">Save</button>
+
+    </form>
+  </div>
+</div>

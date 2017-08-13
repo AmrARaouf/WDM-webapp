@@ -15,7 +15,7 @@ export class DocumentationService {
 
   constructor(private http: Http) { }
 
-  editDocumentation(documentationId: number, documentation: Documentation): Observable<Documentation> {
+  editDocumentation(documentationId: string, documentation: Documentation): Observable<Documentation> {
     var payload = {
       "documentation": documentation
     };
@@ -24,7 +24,7 @@ export class DocumentationService {
       .catch(this.handleError);
   }
 
-  getDocumentation(id: number): Observable<any> {
+  getDocumentation(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/documentation/${id}`, {headers: this.headers})
       .map( (response: Response) => response.json().documentation )
       .catch(this.handleError);

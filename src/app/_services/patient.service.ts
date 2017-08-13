@@ -21,7 +21,7 @@ export class PatientService {
       .catch(this.handleError);
   }
 
-  getPatient(id: number): Observable<any> {
+  getPatient(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/patient/${id}`, {headers: this.headers})
       .map( (response: Response) => response.json().patient )
       .catch(this.handleError);

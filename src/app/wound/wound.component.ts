@@ -57,8 +57,8 @@ export class WoundComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe( params => {
-      var woundId = params['woundId'];
-      var patientId = params['patientId'];
+      var woundId: string = params['woundId'];
+      var patientId: string = params['patientId'];
       this.patientService.getPatient(patientId).subscribe( (patient: Patient) => {this.patient = patient; this.isPatientDataAvailable = true;} );
       this.woundService.getWound(woundId).subscribe( (wound: Wound) => {
         this.wound = wound;
