@@ -1,6 +1,6 @@
 <app-notifications></app-notifications>
 
-<div class="container" *ngIf="isDataAvailable">
+<div class="container" *ngIf="isWoundDataAvailable && isPatientDataAvailable">
 
   <h3>Wund am "{{ wound?.position }}"</h3>
 
@@ -27,6 +27,7 @@
             <canvas baseChart width="400" height="300"
                         [datasets]="lengthWidthChartData"
                         [labels]="chartLabels"
+                        [options]="chartOptions"
                         legend="True"
                         chartType="line">
             </canvas>
@@ -56,7 +57,219 @@
       </div>
     </div>
 
-    <div id="img" class="tab-pane fade in active">
+    <div id="affectedTissue" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="300"
+                        [datasets]="affectedTissueChartData"
+                        [labels]="chartLabels"
+                        [options]="chartOptions"
+                        legend="True"
+                        chartType="line">
+            </canvas>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Betroffene Gewebsstruktu</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date | date:'medium' }}</td> 
+                 <td>{{ doc.affectedTissue }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="color" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="300"
+                        [datasets]="colorChartData"
+                        [labels]="chartLabels"
+                        [options]="chartOptions"
+                        legend="True"
+                        chartType="line">
+            </canvas>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Wundzustand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date | date:'medium' }}</td> 
+                 <td>{{ doc.color }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="exsudat" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="300"
+                        [datasets]="exsudatChartData"
+                        [labels]="chartLabels"
+                        [options]="chartOptions"
+                        legend="True"
+                        chartType="line">
+            </canvas>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Wundexsudat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date | date:'medium' }}</td> 
+                 <td>{{ doc.exsudat }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="edge" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Wundrand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date | date:'medium' }}</td> 
+                 <td>{{ doc.edge }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+   
+    <div id="symptoms" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Weitere Symptomatik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date | date:'medium' }}</td> 
+                 <td>{{ doc.symptoms }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="assessment" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="300"
+                        [datasets]="assessmentChartData"
+                        [labels]="chartLabels"
+                        [options]="chartOptions"
+                        legend="True"
+                        chartType="line">
+            </canvas>
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Wundbeurteilung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date | date:'medium' }}</td> 
+                 <td>{{ doc.assessment }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="comment" class="tab-pane fade in">
+      <div class="row">
+        <div class="col-md-6" style="margin-bottom: 10px">
+         
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Datum</th>
+                <th>Bemerkung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of wound?.documentations">
+                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>{{ doc.date | date:'medium' }}</td> 
+                 <td>{{ doc.comment }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="img" class="tab-pane fade in">
         <div id="carouselId" class="carousel slide" data-ride="carousel" style="width:600px">
           <div class="carousel-inner">
             <div class="item" [class.active]="isFirst" *ngFor="let doc of wound?.documentations; let isFirst = first">
