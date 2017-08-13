@@ -24,9 +24,9 @@
       <div class="row">
         <div class="col-md-6">
           <div style="display: block;">
-            <canvas baseChart width="400" height="400"
-                        [datasets]="lineChartData"
-                        [labels]="lineChartLabels"
+            <canvas baseChart width="400" height="300"
+                        [datasets]="lengthWidthChartData"
+                        [labels]="chartLabels"
                         legend="True"
                         chartType="line">
             </canvas>
@@ -46,7 +46,7 @@
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
                  <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
-                 <td>{{ doc.date }}</td> 
+                 <td>{{ doc.date | date:'medium' }}</td> 
                  <td>{{ doc.length }}</td>
                  <td>{{ doc.width }}</td>
               </tr>
@@ -58,19 +58,17 @@
 
     <div id="img" class="tab-pane fade in active">
         <div id="carouselId" class="carousel slide" data-ride="carousel" style="width:600px">
-          <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item" [class.active]="isFirst" *ngFor="let doc of wound?.documentations; let isFirst = first">
               <img [src]="apiUrl + '/' + doc.img" style="width:600px;height:450px"/>
               <div class="carousel-caption">
-                <h3>{{ doc.date }}</h3>
+                <h3>{{ doc.date | date:'medium' }}</h3>
               </div>
             </div>
 
-          <!-- Left and right controls -->
           <a class="left carousel-control" href="#carouselId" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Nächste</span>
+            <span class="sr-only">Zurück</span>
           </a>
           <a class="right carousel-control" href="#carouselId" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>

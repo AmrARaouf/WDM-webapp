@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }    from '@angular/http';
+import { DatePipe } from '@angular/common';
 
 // npm modules
 import { QRCodeModule } from 'angular2-qrcode';
@@ -49,7 +50,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     RouterModule.forRoot(ROUTES),
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpModule,    
     QRCodeModule,
     FileUploadModule,
     ChartsModule,
@@ -60,7 +61,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
   providers: [
     PatientService,
     WoundService,
-    DocumentationService
+    DocumentationService,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

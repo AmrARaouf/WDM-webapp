@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { WoundService } from '@app/_services/wound.service'
 import { PatientService } from '@app/_services/patient.service'
@@ -17,8 +18,8 @@ import  * as qr from 'qrcode'
   styles: []
 })
 export class WoundComponent implements OnInit {
-  private lineChartData:Array<any> = [];
-  public lineChartLabels:Array<any> = [];
+  private lengthWidthChartData:Array<any> = [];
+  private chartLabels:Array<any> = [];
   private isDataAvailable:boolean = false;
   private wound: Wound;
   private patient: Patient;
@@ -27,12 +28,14 @@ export class WoundComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private woundService: WoundService,
-    private patientService: PatientService) { }
+    private patientService: PatientService,
+    private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.route.params.subscribe( params => {
       var woundId = params['woundId'];
       var patientId = params['patientId'];
+      this.patientService.getPatient(patientId).subscribe( (patient: Patient) => this.patient = patient );
       this.woundService.getWound(woundId).subscribe( (wound: Wound) => {
         this.wound = wound;
         var length = [];
@@ -40,15 +43,12 @@ export class WoundComponent implements OnInit {
         for (let doc of this.wound.documentations) {
           length.push(doc.length);
           width.push(doc.width);
-          this.lineChartLabels.push(doc.date);
+          this.chartLabels.push(this.datePipe.transform(doc.date, 'medium'));
         }
-        this.lineChartData.push({data: length, label: 'Länge'});
-        this.lineChartData.push({data: width, label: 'Breite'});
-
-        console.log(this.lineChartData);
+        this.lengthWidthChartData.push({data: length, label: 'Länge'});
+        this.lengthWidthChartData.push({data: width, label: 'Breite'});
         this.isDataAvailable = true;
       } );
-      this.patientService.getPatient(patientId).subscribe( (patient: Patient) => this.patient = patient );
     })
   }
 

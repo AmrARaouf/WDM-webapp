@@ -28,8 +28,8 @@
         <td><a [routerLink]="['/patient', patient._id]" >{{patient.firstName}} {{patient.lastName}}</a></td>
         <td>{{patient.address}}</td>
         <td>{{!!patient.reference ? "Einrichtung" : "Extern"}}</td>
-        <td>{{patient.birthdate}}</td>
-        <td>{{patient.creationDate}}</td>
+        <td>{{patient.birthdate | date}}</td>
+        <td>{{patient.creationDate | date}}</td>
       </tr>
     </tbody>
 
