@@ -19,8 +19,32 @@ import  * as qr from 'qrcode'
 })
 export class WoundComponent implements OnInit {
   private lengthWidthChartData:Array<any> = [];
+  private colorChartData:Array<any> = [];
+  private affectedTissueChartData: Array<any> = [];
+  private exsudatChartData: Array<any> = [];
+  private assessmentChartData: Array<any> = [];
   private chartLabels:Array<any> = [];
-  private isDataAvailable:boolean = false;
+  private chartOptions = {
+    elements: {
+        line: {
+            tension: 0
+        }
+    },
+    scales: {
+      xAxes: [{
+        type: 'time',
+        time: {
+          format: 'll',
+          unit: 'day',
+          displayFormats: {
+            'day': 'll', 
+          }
+        }
+      }]
+    }
+  };
+  private isWoundDataAvailable:boolean = false;
+  private isPatientDataAvailable: boolean = false;
   private wound: Wound;
   private patient: Patient;
   private apiUrl: string = environment.apiUrl;
@@ -35,19 +59,32 @@ export class WoundComponent implements OnInit {
     this.route.params.subscribe( params => {
       var woundId = params['woundId'];
       var patientId = params['patientId'];
-      this.patientService.getPatient(patientId).subscribe( (patient: Patient) => this.patient = patient );
+      this.patientService.getPatient(patientId).subscribe( (patient: Patient) => {this.patient = patient; this.isPatientDataAvailable = true;} );
       this.woundService.getWound(woundId).subscribe( (wound: Wound) => {
         this.wound = wound;
         var length = [];
         var width = [];
+        var color = [];
+        var assessment = [];
+        var exsudat = [];
+        var affectedTissue = [];
         for (let doc of this.wound.documentations) {
           length.push(doc.length);
           width.push(doc.width);
+          color.push(doc.color);
+          assessment.push(doc.assessment);
+          exsudat.push(doc.exsudat);
+          affectedTissue.push(doc.affectedTissue)
+
           this.chartLabels.push(this.datePipe.transform(doc.date, 'medium'));
         }
-        this.lengthWidthChartData.push({data: length, label: 'Länge'});
-        this.lengthWidthChartData.push({data: width, label: 'Breite'});
-        this.isDataAvailable = true;
+        this.assessmentChartData.push({data:assessment, label: 'Wundbeurteilung'});
+        this.exsudatChartData.push({data:exsudat, label: 'Wundexsudat'});
+        this.affectedTissueChartData.push({data:affectedTissue, label: 'Betroffene Gewebsstruktu'});
+        this.colorChartData.push({data:color, label: 'Wundzustand'});
+        this.lengthWidthChartData.push({data: length, label: 'Länge', fill: false});
+        this.lengthWidthChartData.push({data: width, label: 'Breite', fill: false});
+        this.isWoundDataAvailable = true;
       } );
     })
   }

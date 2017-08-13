@@ -6,7 +6,6 @@ img.body-img {
 .navbar-default .dropdown-menu.notify-drop {
   min-width: 330px;
   background-color: #fff;
-  min-height: 360px;
   max-height: 360px;
 }
 .navbar-default .dropdown-menu.notify-drop .notify-drop-title {
