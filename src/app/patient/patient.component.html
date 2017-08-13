@@ -2,42 +2,51 @@
 
 <div class="container">
 
-  <h2>{{patient?.firstName}} {{patient?.lastName}}</h2>
+  <h2 class="text-center">{{patient?.firstName}} {{patient?.lastName}}</h2>
+  <div class="row">
+    <button class="pull-left btn btn-success" [routerLink]="['/patient', patient?._id,'wound', 'new']">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Neu Wunde
+    </button>
 
-  <button class="btn btn-primary" [disabled]="!patient" (click)="downloadAllQRCode()">Alle Wunde QR-code herunterladen</button>
+    <button class="pull-right btn btn-primary" [disabled]="!patient || patient.wounds.length == 0" (click)="downloadAllQRCode()">
+      <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+      Alle Wunden QR-code herunterladen
+    </button>
+  </div>
 
-  <button class="btn btn-primary" [routerLink]="['/patient', patient?._id,'wound', 'new']">Neu Wund</button>
+  <div class="row">
+    <table *ngIf="patient && patient.wounds.length > 0" class="table view-table pull-left">
+      <thead>
+        <tr>
+          <th>Bearbeiten</th>
+          <th>Wundlokalisation</th>
+          <th>Wundart</th>
+          <th>Wundursache</th>
+          <!--th>QR Code</th-->
+        </tr>
+      </thead>
 
-  <table class="table">
+      <tbody>
+        <tr *ngFor="let wound of patient?.wounds | filter:term">
+          <td>
+            <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'edit']">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </a>
+          </td>
+          <td>
+            <a [routerLink]="['/patient', patient._id,'wound', wound._id]">
+              {{WOUND_POSITIONS[wound.position + ""]}}
+            </a>
+          </td>
+          <td>{{wound.reason}}</td>
+          <td>{{wound.type}}</td>
+          <!--td><qr-code [value]="wound?._id" [size]="150"></qr-code></td-->
+        </tr>
+      </tbody>
+    </table>
 
-    <thead>
-      <tr>
-        <th>Edit</th>
-        <th>Wundlokalisation</th>
-        <th>Wundart</th>
-        <th>Wundursache</th>
-        <!--th>QR Code</th-->
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let wound of patient?.wounds | filter:term">
-        <td>
-          <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'edit']">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-          </a>
-        </td>
-        <td>
-          <a [routerLink]="['/patient', patient._id,'wound', wound._id]">
-            {{WOUND_POSITIONS[wound.position + ""]}}
-          </a>
-        </td>
-        <td>{{wound.reason}}</td>
-        <td>{{wound.type}}</td>
-        <!--td><qr-code [value]="wound?._id" [size]="150"></qr-code></td-->
-      </tr>
-    </tbody>
-
-  </table>
-
+    <h4 *ngIf="patient && patient.wounds.length == 0" class="text-center">Der Patient hat keine registrierten Wunden
+</h4>
+  </div>
 </div>
