@@ -33,6 +33,7 @@ import { WoundComponent } from '@app/wound/wound.component';
 import { WoundFormComponent } from '@app/wound-form/wound-form.component';
 import { DocumentationFormComponent } from './documentation-form/documentation-form.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { WoundEditComponent } from './wound-edit/wound-edit.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     WoundFormComponent,
     DocumentationFormComponent,
     NotificationsComponent,
+    WoundEditComponent,
   ],
   imports: [
     BrowserModule,

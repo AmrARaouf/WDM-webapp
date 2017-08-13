@@ -12,20 +12,28 @@
 
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Edit</th>
+        <th>Wundlokalisation</th>
         <th>Wundart</th>
         <th>Wundursache</th>
-        <th>Wundlokalisation</th>
         <!--th>QR Code</th-->
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let wound of patient?.wounds | filter:term">
-        <td><a [routerLink]="['/patient', patient._id,'wound', wound._id]" >{{wound._id}}</a></td>
+        <td>
+          <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'edit']">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+          </a>
+        </td>
+        <td>
+          <a [routerLink]="['/patient', patient._id,'wound', wound._id]">
+            {{WOUND_POSITIONS[wound.position + ""]}}
+          </a>
+        </td>
         <td>{{wound.reason}}</td>
         <td>{{wound.type}}</td>
-        <td>{{wound.position}}</td>
         <!--td><qr-code [value]="wound?._id" [size]="150"></qr-code></td-->
       </tr>
     </tbody>

@@ -6,6 +6,8 @@ import { PatientService } from '@app/_services/patient.service'
 import { Wound } from '@models/Wound';
 import { Patient } from '@models/Patient';
 
+import { WOUND_POSITIONS} from '@app/app.constants';
+
 import * as jsPDF from 'jspdf'
 import  * as qr from 'qrcode'
 
@@ -17,12 +19,14 @@ import  * as qr from 'qrcode'
 export class PatientComponent implements OnInit {
 
   private patient;
+  private WOUND_POSITIONS: object;
 
   constructor(
     private route: ActivatedRoute,
     private patientService: PatientService) { }
 
   ngOnInit() {
+    this.WOUND_POSITIONS = WOUND_POSITIONS;
     this.route.params.subscribe( params => {
       var patientId = params['patientId'];
       this.patientService.getPatient(patientId).subscribe( patient => this.patient = patient );
