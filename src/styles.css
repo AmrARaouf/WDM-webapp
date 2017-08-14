@@ -31,6 +31,14 @@ img.body-img {
   width: 100%;
 }
 
+.width-50{
+  width: 50%;
+}
+
+.centered{
+  margin: auto;
+}
+
 .navbar-default .dropdown-menu.notify-drop {
   min-width: 330px;
   background-color: #fff;

@@ -21,12 +21,14 @@
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/chart.js/src/chart.js",
+        "../node_modules/lightbox2/dist/css/lightbox.css",
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "../node_modules/jspdf/dist/jspdf.min.js"
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/lightbox2/dist/js/lightbox.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

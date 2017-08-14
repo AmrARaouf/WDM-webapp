@@ -6,7 +6,9 @@
 
     <div class="row wound-given-data margin-bottom-24">
       <div class="col-sm-6">
-        <img class="width-100" [src]="apiUrl + '/' + documentation.img"/>
+        <a [href]="apiUrl + '/' + documentation.img" data-lightbox="image" data-title="Wundbild">
+          <img class="width-50" [src]="apiUrl + '/' + documentation.img"/>
+        </a>
       </div>
 
       <div class="col-sm-6">

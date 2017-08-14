@@ -307,10 +307,12 @@
     </div>
 
     <div id="img" class="tab-pane fade in">
-      <div id="carouselId" class="carousel slide" data-ride="carousel" style="width:600px">
+      <div id="carouselId" class="carousel slide width-50 centered" data-ride="carousel">
         <div class="carousel-inner">
           <div class="item" [class.active]="isFirst" *ngFor="let doc of wound?.documentations; let isFirst = first">
-            <img [src]="apiUrl + '/' + doc.img" style="width:600px;height:450px"/>
+            <a [href]="apiUrl + '/' + doc.img" data-lightbox="image" data-title="Wundbild">
+              <img class="width-100" [src]="apiUrl + '/' + doc.img"/>
+            </a>
             <div class="carousel-caption">
               <h3>{{ doc.date | date:'medium' }}</h3>
             </div>
