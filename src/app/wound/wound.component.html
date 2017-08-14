@@ -1,5 +1,4 @@
-<app-notifications></app-notifications>
-
+<app-notifications *ngIf="isWoundDataAvailable && isPatientDataAvailable" [patientLink]="patient._id" pageName="Wunde"></app-notifications>
 <div class="container" *ngIf="isWoundDataAvailable && isPatientDataAvailable">
 
   <h1 class="text-center">Wunde am {{ WOUND_POSITIONS[wound.position + ""] }}</h1>
@@ -18,7 +17,7 @@
     <li><a data-toggle="tab" href="#affectedTissue">Betroffene Gewebsstruktu</a></li>
     <li><a data-toggle="tab" href="#color">Wundzustand</a></li>
     <li><a data-toggle="tab" href="#exsudat">Wundexsudat</a></li>
-    <li><a data-toggle="tab" href="#edge">Wundrand</a></li>
+    <li><a data-toggle="tab" href="#edges">Wundrand</a></li>
     <li><a data-toggle="tab" href="#symptoms">Weitere Symptomatik</a></li>
     <li><a data-toggle="tab" href="#assessment">Wundbeurteilung</a></li>
     <li><a data-toggle="tab" href="#comment">Bemerkung</a></li>
@@ -33,7 +32,7 @@
             <canvas baseChart width="400" height="300"
                         [datasets]="lengthWidthChartData"
                         [labels]="chartLabels"
-                        [options]="chartOptions"
+                        [options]="lengthWidthChartOptions"
                         legend="True"
                         chartType="line">
             </canvas>
@@ -44,7 +43,7 @@
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Länge</th>
                 <th>Breite</th>
@@ -52,10 +51,14 @@
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
-                 <td>{{ doc.length }}</td>
-                 <td>{{ doc.width }}</td>
+                 <td>{{ doc.length *100 | number : '1.2-2'}} cm</td>
+                 <td>{{ doc.width *100 | number : '1.2-2'}} cm</td>
               </tr>
             </tbody>
           </table>
@@ -70,7 +73,7 @@
             <canvas baseChart width="400" height="300"
                         [datasets]="affectedTissueChartData"
                         [labels]="chartLabels"
-                        [options]="chartOptions"
+                        [options]="affectedTissueChartOptions"
                         legend="True"
                         chartType="line">
             </canvas>
@@ -81,16 +84,20 @@
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Betroffene Gewebsstruktu</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
-                 <td>{{ doc.affectedTissue }}</td>
+                 <td *ngIf="DOCUMENTATION_AFFECTED_TISSUE[doc.affectedTissue -1]">{{ DOCUMENTATION_AFFECTED_TISSUE[doc.affectedTissue -1].label }}</td>
               </tr>
             </tbody>
           </table>
@@ -105,7 +112,7 @@
             <canvas baseChart width="400" height="300"
                         [datasets]="colorChartData"
                         [labels]="chartLabels"
-                        [options]="chartOptions"
+                        [options]="colorChartOptions"
                         legend="True"
                         chartType="line">
             </canvas>
@@ -116,16 +123,20 @@
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Wundzustand</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
-                 <td>{{ doc.color }}</td>
+                 <td *ngIf="DOCUMENTATION_COLOR[doc.color -1]">{{ DOCUMENTATION_COLOR[doc.color -1].label }}</td>
               </tr>
             </tbody>
           </table>
@@ -140,7 +151,7 @@
             <canvas baseChart width="400" height="300"
                         [datasets]="exsudatChartData"
                         [labels]="chartLabels"
-                        [options]="chartOptions"
+                        [options]="exsudatChartOptions"
                         legend="True"
                         chartType="line">
             </canvas>
@@ -151,16 +162,20 @@
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Wundexsudat</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
-                 <td>{{ doc.exsudat }}</td>
+                 <td *ngIf="DOCUMENTATION_EXSUDAT[doc.exsudat -1]">{{ DOCUMENTATION_EXSUDAT[doc.exsudat -1].label }}</td>
               </tr>
             </tbody>
           </table>
@@ -168,23 +183,27 @@
       </div>
     </div>
 
-    <div id="edge" class="tab-pane fade in">
+    <div id="edges" class="tab-pane fade in">
       <div class="row">
         <div class="col-md-6" style="margin-bottom: 10px">
          
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Wundrand</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
-                 <td>{{ doc.edge }}</td>
+                 <td>{{ doc.edges }}</td>
               </tr>
             </tbody>
           </table>
@@ -199,14 +218,18 @@
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Weitere Symptomatik</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
                  <td>{{ doc.symptoms }}</td>
               </tr>
@@ -223,7 +246,7 @@
             <canvas baseChart width="400" height="300"
                         [datasets]="assessmentChartData"
                         [labels]="chartLabels"
-                        [options]="chartOptions"
+                        [options]="assessmentChartOptions"
                         legend="True"
                         chartType="line">
             </canvas>
@@ -234,16 +257,20 @@
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Wundbeurteilung</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
-                 <td>{{ doc.assessment }}</td>
+                 <td *ngIf="DOCUMENTATION_ASSESSMENT[doc.assessment -1]">{{ DOCUMENTATION_ASSESSMENT[doc.assessment -1].label }}</td>
               </tr>
             </tbody>
           </table>
@@ -258,14 +285,18 @@
           <table class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Bearbeiten</th>
                 <th>Datum</th>
                 <th>Bemerkung</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let doc of wound?.documentations">
-                 <td><a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]" >{{doc._id}}</a></td>
+                 <td>
+                  <a [routerLink]="['/patient', patient._id,'wound', wound._id, 'documentation', doc._id]">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  </a>
+                 </td>
                  <td>{{ doc.date | date:'medium' }}</td> 
                  <td>{{ doc.comment }}</td>
               </tr>

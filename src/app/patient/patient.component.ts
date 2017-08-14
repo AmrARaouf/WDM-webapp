@@ -40,7 +40,7 @@ export class PatientComponent implements OnInit {
       qr.toDataURL(wound._id, function (err, url) {        
         doc.setFontSize(25);
         doc.text(35, 25, `Patient/in: ${self.patient.firstName} ${self.patient.lastName}`);
-        doc.text(35, 38, `Wundlokalisation: ${wound.position}`);
+        doc.text(35, 38, `Wundlokalisation: ${self.WOUND_POSITIONS[wound.position]}`);
         doc.addImage(url, 'JPEG', 15, 45, 180, 180);
         if(index+1 != len){
           doc.addPage();

@@ -12,7 +12,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ChartsModule } from 'ng2-charts';
 import { MyDatePickerModule } from 'mydatepicker';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { CustomFormsModule } from 'ng2-validation'
 
 // routes
@@ -59,7 +58,6 @@ import { WoundEditComponent } from './wound-edit/wound-edit.component';
     ChartsModule,
     MyDatePickerModule,
     Ng2SearchPipeModule,
-    Ng2BreadcrumbModule.forRoot(),
     CustomFormsModule
   ],
   providers: [

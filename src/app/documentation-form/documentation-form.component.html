@@ -1,13 +1,12 @@
-<app-notifications></app-notifications>
-
 <div *ngIf="documentation" class="row">
+  <app-notifications [patientLink]="patientId" [woundLink]="woundId" pageName="Dokumentation bearbeiten"></app-notifications>
   <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
 
     <h1 class="text-center">Wunddokumentation</h1>
 
     <div class="row wound-given-data margin-bottom-24">
       <div class="col-sm-6">
-        <img [src]="apiUrl + '/' + documentation.img" width="100%"/>
+        <img class="width-100" [src]="apiUrl + '/' + documentation.img"/>
       </div>
 
       <div class="col-sm-6">
@@ -17,11 +16,11 @@
         </div> 
         <div class="form-group">
           <label>Länge</label>
-          <div>{{ documentation?.length }}</div>
+          <div>{{ documentation?.length *100 | number : '1.2-2'}} cm</div>
         </div>
         <div class="form-group">
           <label>Breite</label>
-          <div>{{ documentation?.width }}</div>
+          <div>{{ documentation?.width *100 | number : '1.2-2'}} cm</div>
         </div>
       </div>
     </div>

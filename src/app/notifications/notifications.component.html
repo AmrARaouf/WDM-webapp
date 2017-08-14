@@ -1,8 +1,31 @@
-<div class="container">
+<div class="container width-100">
   <div class="row">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <ol class="breadcrumb padding-top-15">
+              <li class="breadcrumb-item">                
+                <a [routerLink]="['/']">
+                  <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                  WDM
+                </a>
+              </li>
+              <li class="breadcrumb-item" *ngIf="patientLink">
+                <a [routerLink]="['/patient', patientLink]">
+                  Patient
+                </a>
+              </li>
+              <li class="breadcrumb-item" *ngIf="woundLink">
+                <a [routerLink]="['/patient', patientLink, 'wound', woundLink]">
+                  Wund
+                </a>
+              </li>
+              <li class="breadcrumb-item" *ngIf="pageName">
+                  {{ pageName }}
+              </li>
+            </ol>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bitte füllen Sie die Daten für (<b>{{ notifications.length }}</b>) Wunddokumentationen aus</a>
@@ -24,6 +47,7 @@
               </ul>
             </li>
           </ul>
+
         </div>
       </div>
     </nav>

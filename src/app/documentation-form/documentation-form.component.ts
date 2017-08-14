@@ -14,6 +14,8 @@ import { DOCUMENTATION_AFFECTED_TISSUE, DOCUMENTATION_COLOR, DOCUMENTATION_EXSUD
   styles: []
 })
 export class DocumentationFormComponent implements OnInit {
+  private patientId: string ="";
+  private woundId: string ="";
 
   private apiUrl: string = environment.apiUrl;
   private documentationForm: FormGroup;
@@ -34,7 +36,10 @@ export class DocumentationFormComponent implements OnInit {
   ngOnInit() {
     this.initPageConstants();
     
-    this.route.params.subscribe( params => {
+    this.route.params.subscribe( params => {      
+      this.patientId =params['patientId'];
+      this.woundId = params['woundId'];
+
       var documentationId = params['documentationId'];
       this.documentationService.getDocumentation(documentationId).subscribe( (documentation: Documentation) => {
         this.documentation = documentation;

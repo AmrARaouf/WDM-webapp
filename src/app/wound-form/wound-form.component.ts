@@ -14,6 +14,8 @@ import { WoundService } from '@app/_services/wound.service'
   styles: []
 })
 export class WoundFormComponent implements OnInit {
+  patientId: string;
+
   private woundForm: FormGroup;
   private WOUND_TYPES: string[];
   private WOUND_REASONS: string[];
@@ -26,6 +28,9 @@ export class WoundFormComponent implements OnInit {
   ngOnInit() {
     this.initPageConstants();
     this.initDocumentationForm();
+    this.route.params.subscribe( params => { 
+      this.patientId = params['patientId'];
+    });
   }
 
   specialTypeKeypress(event) {
@@ -34,14 +39,11 @@ export class WoundFormComponent implements OnInit {
 
   onSubmit() {
     // console.log(this.woundForm.value);
-    this.route.params.subscribe( params => {
-      var patientId = params['patientId'];
-      var newWound = <Wound>this.woundForm.value;
-      console.log(patientId, newWound);
-      this.woundService.createWound(patientId, newWound).subscribe( (wound: Wound) => {
-        this.router.navigate(['/patient', patientId]);
-      });
-    })
+    var newWound = <Wound>this.woundForm.value;
+    console.log(this.patientId, newWound);
+    this.woundService.createWound(this.patientId, newWound).subscribe( (wound: Wound) => {
+      this.router.navigate(['/patient', this.patientId]);
+    });
   }
 
   private initPageConstants() {

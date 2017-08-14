@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { DocumentationService } from '@app/_services/documentation.service'
 import { environment } from '@env/environment'
@@ -9,6 +9,10 @@ import { environment } from '@env/environment'
   styles: []
 })
 export class NotificationsComponent implements OnInit {
+
+  @Input() patientLink: string;
+  @Input() woundLink: string;
+  @Input() pageName: string;
 
   private apiUrl: string = environment.apiUrl;
   private notifications;
